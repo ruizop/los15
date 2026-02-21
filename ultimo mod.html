@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mis 15 Años - Catalina</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0; padding: 0; width: 100%; min-height: 100vh;
+            font-family: 'Montserrat', sans-serif;
+            background: radial-gradient(circle at top center, #01436b 0%, #001f3f 100%);
+            background-attachment: fixed; color: white;
+            overflow-x: hidden; position: relative;
+        }
+
+        /* Rayos de luz */
+        .rayos-luz { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 100%); clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%); animation: oscilar 8s infinite alternate ease-in-out; pointer-events: none; z-index: 0; }
+        @keyframes oscilar { 0% { transform: translateX(-5%); opacity: 0.5; } 100% { transform: translateX(5%); opacity: 0.8; } }
+
+        /* Burbujas Ambientales */
+        .burbuja { position: fixed; background: rgba(255, 255, 255, 0.4); border-radius: 50%; animation: subir infinite ease-in; z-index: 1; pointer-events: none; }
+        @keyframes subir { 0% { transform: translateY(110vh) scale(0.5); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateY(-100px) scale(1.5); opacity: 0; } }
+
+        /* Burbujas Transición */
+        .burbuja-rapida { position: fixed; bottom: -50px; background: rgba(255, 255, 255, 0.6); border-radius: 50%; animation: subir-rapido ease-in forwards; z-index: 1000; pointer-events: none; box-shadow: 0 0 15px rgba(255,255,255,0.8); }
+        @keyframes subir-rapido { 0% { transform: translateY(0) scale(0.5); opacity: 0; } 20% { opacity: 1; } 100% { transform: translateY(-120vh) scale(2.5); opacity: 0; } }
+
+        /* PORTADA MODIFICADA (MÁS EMOCIÓN Y PROTAGONISMO) */
+        .hero { position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; text-align: center; padding: 20px 15px; }
+        
+        .pre-titulo { font-size: 1.1rem; font-weight: 300; letter-spacing: 4px; text-transform: uppercase; color: #81d4fa; margin-bottom: -15px; }
+        .titulo-catalina { font-family: 'Cinzel', serif; font-size: clamp(4rem, 15vw, 7.5rem); margin: 10px 0 0 0; color: #ffffff; text-shadow: 0 0 20px rgba(129, 212, 250, 0.8); animation: brillar 4s infinite alternate; line-height: 1.1; }
+        .sub-15 { font-family: 'Cinzel', serif; font-size: 2rem; color: #b3e5fc; margin-top: 0; font-weight: 400; letter-spacing: 2px; }
+        
+        .intro-texto { font-size: 1.2rem; font-weight: 300; max-width: 650px; color: #e1f5fe; margin-top: 20px; line-height: 1.6; }
+        .pre-contador { font-size: 1rem; font-weight: 500; color: #81d4fa; margin-top: 30px; margin-bottom: -15px; text-transform: uppercase; letter-spacing: 1px;}
+        
+        @keyframes brillar { 0% { text-shadow: 0 0 10px rgba(129,212,250,0.5); } 100% { text-shadow: 0 0 30px rgba(129,212,250,1); } }
+
+        #contador { display: flex; justify-content: center; gap: 10px; margin: 30px 0; }
+        .tiempo { background: rgba(0, 31, 63, 0.6); backdrop-filter: blur(5px); padding: 15px 12px; border-radius: 12px; min-width: 70px; border: 1px solid rgba(129, 212, 250, 0.3); box-shadow: 0 0 15px rgba(2, 136, 209, 0.4); }
+        .tiempo span { display: block; font-size: 2.2rem; font-weight: 700; color: #81d4fa; }
+        .tiempo p { margin: 0; font-size: 0.75rem; text-transform: uppercase; font-weight: 600; color: #e1f5fe; letter-spacing: 1px; }
+
+        .btn-magico { background: linear-gradient(45deg, #0288d1, #00acc1); border: 1px solid #81d4fa; color: white; padding: 15px 40px; border-radius: 50px; font-size: 1.1rem; font-weight: 600; text-decoration: none; text-transform: uppercase; letter-spacing: 2px; transition: all 0.3s; box-shadow: 0 0 20px rgba(2, 136, 209, 0.5); margin-top: 20px; cursor: pointer; }
+        .btn-magico:hover { transform: translateY(-5px); box-shadow: 0 0 40px rgba(2, 136, 209, 0.8); }
+
+        /* CONTENIDO PRINCIPAL */
+        .contenido { max-width: 900px; margin: 0 auto; padding: 60px 20px 100px; position: relative; z-index: 10; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; gap: 30px; } }
+
+        .caja-info { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); padding: 25px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        h3 { font-family: 'Cinzel', serif; font-size: 1.6rem; color: #81d4fa; margin-top: 0; border-bottom: 1px solid rgba(129, 212, 250, 0.3); padding-bottom: 10px; }
+        p { line-height: 1.6; color: #e1f5fe; font-size: 1.05rem; }
+        .resalte { font-weight: 700; color: #ffffff; font-size: 1.15rem; }
+
+        /* Reproductor de Audio Nativo */
+        .reproductor-nativo { width: 100%; margin-top: 15px; outline: none; border-radius: 30px; }
+
+        /* Estilo QR y Tritón */
+        .caja-triton { background: linear-gradient(135deg, rgba(2, 136, 209, 0.15), rgba(0, 172, 193, 0.15)); border: 1px solid #00acc1; text-align: center; }
+        .destaque-app { background: #00acc1; color: #001f3f; padding: 4px 10px; border-radius: 5px; font-weight: bold; font-size: 0.85rem; display: inline-block; margin-bottom: 10px;}
+        .qr-img { width: 130px; height: 130px; margin: 10px auto; border-radius: 10px; border: 3px solid #81d4fa; padding: 5px; background: white; }
+        .alerta-triton { background: rgba(0, 0, 0, 0.4); padding: 12px; border-radius: 10px; font-size: 0.85rem; margin-top: 15px; border-left: 4px solid #ffca28; text-align: left; line-height: 1.4;}
+
+        /* Formulario RSVP Premium */
+        .form-rsvp { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
+        .form-rsvp input { width: 100%; padding: 15px; border-radius: 10px; border: 1px solid rgba(129, 212, 250, 0.3); background: rgba(0, 0, 0, 0.3); color: white; font-family: 'Montserrat', sans-serif; font-size: 1rem; outline: none; transition: border 0.3s; }
+        .form-rsvp input::placeholder { color: rgba(255, 255, 255, 0.5); }
+        .form-rsvp input:focus { border-color: #81d4fa; background: rgba(0, 0, 0, 0.5); }
+        .btn-whatsapp { display: block; width: 100%; text-align: center; background: linear-gradient(45deg, #25D366, #128C7E); color: white; padding: 15px; border: none; border-radius: 10px; font-weight: 700; font-size: 1.1rem; font-family: 'Montserrat', sans-serif; cursor: pointer; box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4); transition: transform 0.3s; margin-top: 5px;}
+        .btn-whatsapp:hover { transform: translateY(-3px); }
+
+        /* ASISTENTE IA MEJORADO */
+        .asistente-btn { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background: rgba(2, 136, 209, 0.9); backdrop-filter: blur(5px); border: 2px solid #81d4fa; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; cursor: pointer; box-shadow: 0 0 20px rgba(2, 136, 209, 0.6); z-index: 100; transition: transform 0.3s; }
+        .asistente-btn:hover { transform: scale(1.1) rotate(10deg); }
+        .chat-ventana { position: fixed; bottom: 90px; right: 20px; width: calc(100% - 40px); max-width: 350px; background: rgba(0, 31, 63, 0.95); backdrop-filter: blur(10px); border: 1px solid #0288d1; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: none; flex-direction: column; overflow: hidden; z-index: 100; }
+        .chat-header { background: #0288d1; color: white; padding: 15px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+        .cerrar-chat { cursor: pointer; font-weight: bold; padding: 5px; }
+        .chat-cuerpo { height: 280px; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; scroll-behavior: smooth;}
+        .mensaje { padding: 10px 15px; border-radius: 15px; max-width: 85%; line-height: 1.4; }
+        .msj-bot { background: rgba(2, 136, 209, 0.4); border: 1px solid #0288d1; align-self: flex-start; border-bottom-left-radius: 2px; }
+        .msj-user { background: #00acc1; align-self: flex-end; border-bottom-right-radius: 2px; font-weight: 500; }
+        
+        /* Botones de sugerencias del Chat */
+        .chat-sugerencias { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 5px; }
+        .btn-sugerencia { background: transparent; border: 1px solid #81d4fa; color: #81d4fa; border-radius: 15px; padding: 5px 10px; font-size: 0.8rem; cursor: pointer; transition: 0.3s; }
+        .btn-sugerencia:hover { background: #81d4fa; color: #001f3f; }
+
+        .chat-input { display: flex; border-top: 1px solid #0288d1; background: rgba(0,0,0,0.2); }
+        .chat-input input { flex: 1; padding: 15px; border: none; background: transparent; color: white; outline: none; font-size: 16px; }
+        .chat-input button { background: #0288d1; border: none; color: white; padding: 0 20px; cursor: pointer; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="rayos-luz"></div>
+
+    <script>
+        // Burbujas Ambientales
+        for(let i=0; i<25; i++){
+            let b = document.createElement('div');
+            b.className = 'burbuja';
+            b.style.left = Math.random() * 95 + 'vw'; 
+            b.style.width = Math.random() * 15 + 5 + 'px';
+            b.style.height = b.style.width;
+            b.style.animationDuration = Math.random() * 6 + 6 + 's';
+            b.style.animationDelay = Math.random() * 5 + 's';
+            document.body.appendChild(b);
+        }
+    </script>
+
+    <div class="hero">
+        <h2 class="pre-titulo">Una nueva etapa comienza...</h2>
+        <h1 class="titulo-catalina">Catalina</h1>
+        <h3 class="sub-15">Mis 15 Años</h3>
+        
+        <p class="intro-texto">Te invito a celebrar conmigo este día tan especial. Los recuerdos se viven mejor cuando se construyen bien acompañados. ¡Prepárate para una noche inolvidable!</p>
+        
+        <p class="pre-contador">Mira cuánto falta para el gran momento de reunirnos y disfrutar:</p>
+        <div id="contador">
+            <div class="tiempo"><span id="dias">00</span><p>Días</p></div>
+            <div class="tiempo"><span id="horas">00</span><p>Hrs</p></div>
+            <div class="tiempo"><span id="minutos">00</span><p>Min</p></div>
+            <div class="tiempo"><span id="segundos">00</span><p>Seg</p></div>
+        </div>
+
+        <a href="#detalles" class="btn-magico" onclick="iniciarInmersion(event)">Sumergirse en la fiesta</a>
+    </div>
+
+    <div class="contenido" id="detalles">
+        <div class="grid-2">
+            <div>
+                <div class="caja-info" style="margin-bottom: 30px;">
+                    <h3>El Arrecife</h3>
+                    <p><span class="resalte">Sábado, 14 de Marzo | 18:00 hrs.</span><br>📍 Balmaceda 500, San Bernardo.</p>
+                    <a href="https://maps.google.com/?cid=13501725185266360225&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNl" target="_blank" style="color: #81d4fa; font-weight: bold; text-decoration: none;">Ver ruta en el mapa 🗺️</a>
+                </div>
+                
+                <div class="caja-info" style="margin-bottom: 30px;">
+                    <h3>Dress Code</h3>
+                    <p><span class="resalte">Formal / Semiformal</span><br>Te invitamos a lucir elegante, con mucho brillo y estilo para esta gran noche.</p>
+                </div>
+
+                <div class="caja-info">
+                    <h3>Get Ready With Me</h3>
+                    <p>Escucha las canciones favoritas de Catalina mientras te arreglas (¡Sin anuncios!).</p>
+                    <audio controls class="reproductor-nativo">
+                        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+                        Tu navegador no soporta el reproductor de audio.
+                    </audio>
+                </div>
+            </div>
+
+            <div>
+                <div class="caja-info caja-triton" style="margin-bottom: 30px;">
+                    <h3>El Mural del Tesoro</h3>
+                    <p>¡Captura cada momento! Escanea este QR en la fiesta para subir tus fotos directo a la pantalla gigante.</p>
+                    <span class="destaque-app">¡Sin descargar ninguna App! 📱</span>
+                    <br>
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=SubeTusFotosAqui" class="qr-img" alt="QR Fotos">
+                    <p style="font-size: 0.9rem;"><b>Las fotos más creativas tendrán una sorpresa.</b> 🎁</p>
+                    <div class="alerta-triton">
+                        🔱 <b>ZONA CERO BULLYING:</b> El Rey Tritón está vigilando. Cualquier foto fuera de lugar será eliminada por su tridente. ¡Avisados están!
+                    </div>
+                </div>
+                
+                <div class="caja-info">
+                    <h3>Confirmación</h3>
+                    <p>Por favor, confirma tu asistencia llenando estos datos antes del 1 de marzo.</p>
+                    <form class="form-rsvp" onsubmit="enviarRSVP(event)">
+                        <input type="text" id="rsvp-nombre" placeholder="Tu Nombre y Apellido" required>
+                        <input type="number" id="rsvp-pax" placeholder="¿Cuántas personas asisten? (Ej: 2)" required min="1">
+                        <input type="text" id="rsvp-alergias" placeholder="¿Alguna alergia alimentaria? (Opcional)">
+                        <button type="submit" class="btn-whatsapp">✅ Enviar Confirmación</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="asistente-btn" onclick="toggleChat()">🪸</div>
+    <div class="chat-ventana" id="chatVentana">
+        <div class="chat-header"><span>Sebastián Virtual 🦀</span><span class="cerrar-chat" onclick="toggleChat()">✕</span></div>
+        <div class="chat-cuerpo" id="chatCuerpo">
+            <div class="mensaje msj-bot">
+                ¡Hola! Soy el asistente marino. Hazme una pregunta o elige una opción rápida:
+                <div class="chat-sugerencias">
+                    <button class="btn-sugerencia" onclick="enviarSugerencia('¿Cuál es el código de vestimenta?')">👗 Vestimenta</button>
+                    <button class="btn-sugerencia" onclick="enviarSugerencia('¿A qué hora es?')">⏱️ Horario</button>
+                    <button class="btn-sugerencia" onclick="enviarSugerencia('Cuéntame un chiste')">🤣 Chiste Marino</button>
+                </div>
+            </div>
+        </div>
+        <div class="chat-input"><input type="text" id="userInput" placeholder="Pregunta aquí..." onkeypress="if(event.key === 'Enter') enviarSugerencia(this.value)"><button onclick="enviarSugerencia(document.getElementById('userInput').value)">Enviar</button></div>
+    </div>
+
+    <script>
+        // FORMULARIO A WHATSAPP
+        function enviarRSVP(event) {
+            event.preventDefault(); 
+            const nombre = document.getElementById('rsvp-nombre').value;
+            const pax = document.getElementById('rsvp-pax').value;
+            let alergias = document.getElementById('rsvp-alergias').value;
+            if(!alergias) alergias = "Ninguna"; 
+            const mensaje = `¡Hola! Confirmo mi asistencia a los 15 de Catalina ✨%0A%0A*Nombre:* ${nombre}%0A*Asistentes:* ${pax} persona(s)%0A*Alergias/Dieta:* ${alergias}`;
+            window.open(`https://api.whatsapp.com/send?phone=56955275505&text=${mensaje}`, '_blank');
+        }
+
+        // TRANSICIÓN DE INMERSIÓN
+        function iniciarInmersion(event) {
+            event.preventDefault(); 
+            for(let i=0; i<40; i++){
+                let b = document.createElement('div');
+                b.className = 'burbuja-rapida';
+                b.style.left = Math.random() * 100 + 'vw';
+                b.style.width = Math.random() * 30 + 10 + 'px'; 
+                b.style.height = b.style.width;
+                b.style.animationDuration = Math.random() * 1.5 + 0.8 + 's'; 
+                document.body.appendChild(b);
+            }
+            setTimeout(() => { document.getElementById('detalles').scrollIntoView({ behavior: 'smooth' }); }, 600);
+            setTimeout(() => { document.querySelectorAll('.burbuja-rapida').forEach(e => e.remove()); }, 3000);
+        }
+
+        // Reloj
+        const fechaEvento = new Date("Mar 14, 2026 18:00:00").getTime();
+        setInterval(function() {
+            const distancia = fechaEvento - new Date().getTime();
+            if (distancia < 0) return document.getElementById("contador").innerHTML = "<h3 style='border:none; font-size:2.5rem; color:#fff;'>¡Llegó el gran momento!</h3>";
+            document.getElementById("dias").innerHTML = String(Math.floor(distancia / (1000 * 60 * 60 * 24))).padStart(2, '0');
+            document.getElementById("horas").innerHTML = String(Math.floor((distancia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+            document.getElementById("minutos").innerHTML = String(Math.floor((distancia % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+            document.getElementById("segundos").innerHTML = String(Math.floor((distancia % (1000 * 60)) / 1000)).padStart(2, '0');
+        }, 1000);
+
+        // Chatbot Mejorado
+        function toggleChat() {
+            const chat = document.getElementById('chatVentana');
+            chat.style.display = chat.style.display === 'flex' ? 'none' : 'flex';
+        }
+        
+        function enviarSugerencia(textoSugerido) {
+            const texto = textoSugerido.trim().toLowerCase();
+            if(!texto) return;
+
+            document.getElementById('userInput').value = '';
+            agregarMensaje(textoSugerido, 'msj-user');
+
+            const loadingId = 'loading-' + Date.now();
+            agregarMensaje('<span id="'+loadingId+'">🫧 Procesando burbujas...</span>', 'msj-bot');
+
+            setTimeout(() => {
+                document.getElementById(loadingId).parentElement.remove();
+                let respuesta = "¡Glub! No te entendí bien. Usa los botones mágicos de arriba o pregúntame por la hora y el lugar.";
+                
+                if(texto.includes('foto') || texto.includes('concurso') || texto.includes('triton')) {
+                    respuesta = "¡Sube tus mejores recuerdos escaneando el QR! El Rey Tritón borrará las fotos con bullying. 🔱🦀";
+                } else if(texto.includes('hora') || texto.includes('cuando')) {
+                    respuesta = "La alfombra azul se despliega el **Sábado 14 de Marzo a las 18:00 hrs**. ¡Sé puntual! ⏱️";
+                } else if(texto.includes('ropa') || texto.includes('vestido') || texto.includes('vestimenta')) {
+                    respuesta = "El código es **Formal / Semiformal**. Elegancia marina total. ✨";
+                } else if(texto.includes('donde') || texto.includes('lugar') || texto.includes('mapa')) {
+                    respuesta = "En **Balmaceda 500, San Bernardo**. ¡Sigue la corriente! 🗺️";
+                } else if(texto.includes('chiste') || texto.includes('reir')) {
+                    respuesta = "¿Qué hace un pez en el cine?... ¡Nada! 🐟🎬 Jajaja... mejor me dedico a dar información de la fiesta, ¿verdad?";
+                }
+                
+                agregarMensaje(respuesta, 'msj-bot');
+            }, 800);
+        }
+        
+        function agregarMensaje(texto, clase) {
+            const cuerpo = document.getElementById('chatCuerpo');
+            const div = document.createElement('div');
+            div.className = `mensaje ${clase}`;
+            div.innerHTML = texto;
+            cuerpo.appendChild(div);
+            cuerpo.scrollTop = cuerpo.scrollHeight;
+        }
+    </script>
+</body>
+</html>
